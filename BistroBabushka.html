@@ -19,7 +19,7 @@
       }
       img {
         max-width: 100%;
-
+        aspect-ratio: 16/9;
         object-fit: cover;
       }
 
@@ -66,10 +66,21 @@
 
       body {
         font-family: "DM Sans", sans-serif;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        min-height: 100vh;
       }
 
-      h2 {
+      .ret {
+        display: flex;
+        flex-direction: column;
+        margin: 1em 0.5em;
+      }
+
+      .navn {
         font-size: 1.3rem;
+        flex-grow: 1;
       }
     </style>
   </head>
