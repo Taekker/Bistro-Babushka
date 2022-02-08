@@ -19,7 +19,7 @@
       }
       img {
         max-width: 100%;
-        aspect-ratio: 16/9;
+        aspect-ratio: 16/11;
         object-fit: cover;
       }
 
@@ -38,6 +38,7 @@
       header img {
         max-height: 300px;
         width: 100%;
+        top: 0%;
       }
 
       nav {
@@ -82,6 +83,30 @@
         font-size: 1.3rem;
         flex-grow: 1;
       }
+
+      .oprindelsesregion {
+        font-weight: bolder;
+      }
+
+      #modal {
+        display: none;
+        width: 100vw;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: rgba(0, 0, 0, 0.822);
+        overflow: scroll;
+      }
+
+      #modal article {
+        max-width: 900px;
+        margin: 2em auto;
+        background-color: white;
+        right: 0;
+        text-align: center;
+        border: none;
+      }
     </style>
   </head>
   <body>
@@ -96,6 +121,18 @@
         <button data-kategori="drikkevarer">Drikkevarer</button>
       </nav>
     </header>
+
+    <aside id="modal">
+      <article>
+        <img class="billednavn" src="" alt="" />
+        <p class="kategori"></p>
+        <h2 class="navn"></h2>
+        <p class="langbeskrivelse"></p>
+        <p class="oprindelsesregion"></p>
+        <p class="pris"></p>
+      </article>
+    </aside>
+
     <main>
       <h1>Menu</h1>
       <section></section>
@@ -115,6 +152,7 @@
       <script>
         const container = document.querySelector("section");
         const temp = document.querySelector("template");
+        const modal = document.querySelector("#modal");
 
         const url = "https://babushka-dd8a.restdb.io/rest/menu";
 
@@ -166,10 +204,30 @@
                 ret.kortbeskrivelse;
               klon.querySelector(".pris").textContent =
                 "pris: " + ret.pris + " kr.";
+              klon
+                .querySelector("article")
+                .addEventListener("click", () => visDetaljer(ret));
               container.appendChild(klon);
             }
           });
         }
+
+        function visDetaljer(ret) {
+          console.log(ret);
+          modal.querySelector(".billednavn").src =
+            "medium/" + ret.billednavn + "-md.jpg";
+          modal.querySelector("h2").textContent = ret.navn;
+          modal.querySelector(".langbeskrivelse").textContent =
+            ret.langbeskrivelse;
+          modal.querySelector(".oprindelsesregion").textContent =
+            ret.oprindelsesregion;
+          modal.querySelector(".pris").textContent =
+            "pris: " + ret.pris + " kr.";
+
+          modal.style.display = "block";
+        }
+
+        modal.addEventListener("click", () => (modal.style.display = "none"));
       </script>
     </main>
   </body>
