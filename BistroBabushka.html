@@ -12,6 +12,17 @@
       rel="stylesheet"
     />
     <style>
+      .splash {
+        position: relative;
+        text-align: center;
+        color: white;
+      }
+
+      h1 {
+        position: absolute;
+        bottom: 150px;
+        left: 16px;
+      }
       article {
         border: 2px solid #c273293d;
         padding: 10px;
@@ -31,7 +42,7 @@
         margin: 0 auto 20px;
       }
 
-      h1 {
+      h2 {
         text-align: center;
       }
 
@@ -46,7 +57,7 @@
       }
 
       button {
-        max-width: 100%;
+        width: 130px;
         background-color: #c27329;
         border: none;
         color: white;
@@ -55,7 +66,8 @@
         font-size: 1rem;
       }
 
-      button:hover {
+      button:hover,
+      button:focus {
         color: black;
         cursor: pointer;
       }
@@ -100,19 +112,47 @@
       }
 
       #modal article {
-        max-width: 900px;
+        max-width: 90%;
         margin: 2em auto;
         background-color: white;
         right: 0;
         text-align: center;
         border: none;
       }
+
+      @media (min-width: 600px) {
+        .splash {
+          position: relative;
+          text-align: center;
+          color: white;
+        }
+
+        h1 {
+          font-size: 50px;
+          position: absolute;
+          bottom: 160px;
+          left: 16px;
+        }
+      }
+
+      @media (min-width: 900px) {
+        #modal article {
+          max-width: 800px;
+          margin: 2em auto;
+          background-color: white;
+          right: 0;
+          text-align: center;
+          border: none;
+        }
+      }
     </style>
   </head>
   <body>
     <header>
-      <img src="brooke-lark-4J059aGa5s4-unsplash.jpg" alt="Billede" />
-
+      <div class="splash">
+        <h1>Bistro Babushka</h1>
+        <img src="brooke-lark-4J059aGa5s4-unsplash.jpg" alt="Billede" />
+      </div>
       <nav>
         <button data-kategori="alle">Alle</button>
         <button data-kategori="forretter">Forretter</button>
@@ -126,7 +166,7 @@
       <article>
         <img class="billednavn" src="" alt="" />
         <p class="kategori"></p>
-        <h2 class="navn"></h2>
+        <h3 class="navn"></h3>
         <p class="langbeskrivelse"></p>
         <p class="oprindelsesregion"></p>
         <p class="pris"></p>
@@ -134,17 +174,16 @@
     </aside>
 
     <main>
-      <h1>Menu</h1>
+      <h2>Menu</h2>
       <section></section>
 
       <template>
         <article class="ret">
           <img class="billednavn" src="" alt="" />
           <p class="kategori"></p>
-          <h2 class="navn"></h2>
+          <h3 class="navn"></h3>
           <p class="kortbeskrivelse"></p>
-          <p class="langbeskrivelse"></p>
-          <p class="oprindelsesregion"></p>
+
           <p class="pris"></p>
         </article>
       </template>
@@ -216,7 +255,7 @@
           console.log(ret);
           modal.querySelector(".billednavn").src =
             "medium/" + ret.billednavn + "-md.jpg";
-          modal.querySelector("h2").textContent = ret.navn;
+          modal.querySelector("h3").textContent = ret.navn;
           modal.querySelector(".langbeskrivelse").textContent =
             ret.langbeskrivelse;
           modal.querySelector(".oprindelsesregion").textContent =
